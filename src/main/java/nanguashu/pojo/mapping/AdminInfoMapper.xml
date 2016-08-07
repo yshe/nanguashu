@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.AdminInfoMapper" >
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.AdminInfo" >
+    <id column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CODE" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_SEX" property="employeeSex" jdbcType="INTEGER" />
+    <result column="EMPLOYEE_AGE" property="employeeAge" jdbcType="INTEGER" />
+    <result column="EMPLOYEE_IMG" property="employeeImg" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_PHONE" property="employeePhone" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_BIRTH" property="employeeBirth" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_ID" property="createById" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_NAME" property="createByName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="LAST_UPDATE_BY_ID" property="lastUpdateById" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_BY_NAME" property="lastUpdateByName" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EMPLOYEE_ID, EMPLOYEE_NAME, EMPLOYEE_CODE, EMPLOYEE_SEX, EMPLOYEE_AGE, EMPLOYEE_IMG, 
+    EMPLOYEE_PHONE, EMPLOYEE_BIRTH, CREATE_BY_ID, CREATE_BY_NAME, CREATE_TIME, LAST_UPDATE_BY_ID, 
+    LAST_UPDATE_BY_NAME, LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_admin_info
+    where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nanguashu_admin_info
+    where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.AdminInfo" >
+    insert into nanguashu_admin_info (EMPLOYEE_ID, EMPLOYEE_NAME, EMPLOYEE_CODE, 
+      EMPLOYEE_SEX, EMPLOYEE_AGE, EMPLOYEE_IMG, 
+      EMPLOYEE_PHONE, EMPLOYEE_BIRTH, CREATE_BY_ID, 
+      CREATE_BY_NAME, CREATE_TIME, LAST_UPDATE_BY_ID, 
+      LAST_UPDATE_BY_NAME, LAST_UPDATE_TIME)
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, #{employeeCode,jdbcType=VARCHAR}, 
+      #{employeeSex,jdbcType=INTEGER}, #{employeeAge,jdbcType=INTEGER}, #{employeeImg,jdbcType=VARCHAR}, 
+      #{employeePhone,jdbcType=VARCHAR}, #{employeeBirth,jdbcType=VARCHAR}, #{createById,jdbcType=VARCHAR}, 
+      #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{lastUpdateById,jdbcType=VARCHAR}, 
+      #{lastUpdateByName,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.AdminInfo" >
+    insert into nanguashu_admin_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="employeeName != null" >
+        EMPLOYEE_NAME,
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE,
+      </if>
+      <if test="employeeSex != null" >
+        EMPLOYEE_SEX,
+      </if>
+      <if test="employeeAge != null" >
+        EMPLOYEE_AGE,
+      </if>
+      <if test="employeeImg != null" >
+        EMPLOYEE_IMG,
+      </if>
+      <if test="employeePhone != null" >
+        EMPLOYEE_PHONE,
+      </if>
+      <if test="employeeBirth != null" >
+        EMPLOYEE_BIRTH,
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID,
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastUpdateById != null" >
+        LAST_UPDATE_BY_ID,
+      </if>
+      <if test="lastUpdateByName != null" >
+        LAST_UPDATE_BY_NAME,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null" >
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSex != null" >
+        #{employeeSex,jdbcType=INTEGER},
+      </if>
+      <if test="employeeAge != null" >
+        #{employeeAge,jdbcType=INTEGER},
+      </if>
+      <if test="employeeImg != null" >
+        #{employeeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null" >
+        #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirth != null" >
+        #{employeeBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="lastUpdateById != null" >
+        #{lastUpdateById,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateByName != null" >
+        #{lastUpdateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.AdminInfo" >
+    update nanguashu_admin_info
+    <set >
+      <if test="employeeName != null" >
+        EMPLOYEE_NAME = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSex != null" >
+        EMPLOYEE_SEX = #{employeeSex,jdbcType=INTEGER},
+      </if>
+      <if test="employeeAge != null" >
+        EMPLOYEE_AGE = #{employeeAge,jdbcType=INTEGER},
+      </if>
+      <if test="employeeImg != null" >
+        EMPLOYEE_IMG = #{employeeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null" >
+        EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirth != null" >
+        EMPLOYEE_BIRTH = #{employeeBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="lastUpdateById != null" >
+        LAST_UPDATE_BY_ID = #{lastUpdateById,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateByName != null" >
+        LAST_UPDATE_BY_NAME = #{lastUpdateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.AdminInfo" >
+    update nanguashu_admin_info
+    set EMPLOYEE_NAME = #{employeeName,jdbcType=VARCHAR},
+      EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      EMPLOYEE_SEX = #{employeeSex,jdbcType=INTEGER},
+      EMPLOYEE_AGE = #{employeeAge,jdbcType=INTEGER},
+      EMPLOYEE_IMG = #{employeeImg,jdbcType=VARCHAR},
+      EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
+      EMPLOYEE_BIRTH = #{employeeBirth,jdbcType=VARCHAR},
+      CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      LAST_UPDATE_BY_ID = #{lastUpdateById,jdbcType=VARCHAR},
+      LAST_UPDATE_BY_NAME = #{lastUpdateByName,jdbcType=VARCHAR},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=DATE}
+    where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

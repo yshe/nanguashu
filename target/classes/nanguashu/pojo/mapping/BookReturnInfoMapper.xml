@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.BookReturnInfoMapper" >
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.BookReturnInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
+    <result column="STUDENT_ID" property="studentId" jdbcType="INTEGER" />
+    <result column="RETURN_DAY" property="returnDay" jdbcType="DATE" />
+    <result column="CREATE_BY_ID" property="createById" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_NAME" property="createByName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="RETURN_INFO" property="returnInfo" jdbcType="VARCHAR" />
+    <result column="IS_EXPERIE_TIME" property="isExperieTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BOOK_ID, STUDENT_ID, RETURN_DAY, CREATE_BY_ID, CREATE_BY_NAME, CREATE_TIME, RETURN_INFO, 
+    IS_EXPERIE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_book_return_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nanguashu_book_return_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.BookReturnInfo" >
+    insert into nanguashu_book_return_info (ID, BOOK_ID, STUDENT_ID, 
+      RETURN_DAY, CREATE_BY_ID, CREATE_BY_NAME, 
+      CREATE_TIME, RETURN_INFO, IS_EXPERIE_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{returnDay,jdbcType=DATE}, #{createById,jdbcType=VARCHAR}, #{createByName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{returnInfo,jdbcType=VARCHAR}, #{isExperieTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.BookReturnInfo" >
+    insert into nanguashu_book_return_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bookId != null" >
+        BOOK_ID,
+      </if>
+      <if test="studentId != null" >
+        STUDENT_ID,
+      </if>
+      <if test="returnDay != null" >
+        RETURN_DAY,
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID,
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="returnInfo != null" >
+        RETURN_INFO,
+      </if>
+      <if test="isExperieTime != null" >
+        IS_EXPERIE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="returnDay != null" >
+        #{returnDay,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="returnInfo != null" >
+        #{returnInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isExperieTime != null" >
+        #{isExperieTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.BookReturnInfo" >
+    update nanguashu_book_return_info
+    <set >
+      <if test="bookId != null" >
+        BOOK_ID = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="returnDay != null" >
+        RETURN_DAY = #{returnDay,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="returnInfo != null" >
+        RETURN_INFO = #{returnInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isExperieTime != null" >
+        IS_EXPERIE_TIME = #{isExperieTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.BookReturnInfo" >
+    update nanguashu_book_return_info
+    set BOOK_ID = #{bookId,jdbcType=INTEGER},
+      STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      RETURN_DAY = #{returnDay,jdbcType=DATE},
+      CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      RETURN_INFO = #{returnInfo,jdbcType=VARCHAR},
+      IS_EXPERIE_TIME = #{isExperieTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

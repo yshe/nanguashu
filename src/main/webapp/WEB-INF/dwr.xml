@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC  
+    "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+    "http://directwebremoting.org/schema/dwr30.dtd">
+<dwr>
+    <!-- 测试 -->
+	<allow>
+		<create creator="spring" javascript="ajaxController">
+			<param name="beanName" value="dwrService" />
+		</create>
+	</allow>
+	<!-- 图书管理 -->
+	<allow>
+		<create creator="spring" javascript="ajaxBookController">
+			<param name="beanName" value="dwrBookService" />
+			<convert converter="bean" match="nanguashu.pojo.CommonCodeData">
+			</convert>
+		</create>
+	</allow>
+	<!-- 学生管理 -->
+	<allow>
+		<create creator="spring" javascript="ajaxStudentController">
+			<param name="beanName" value="dwrStudentService" />
+			</convert>
+		</create>
+	</allow>
+</dwr>

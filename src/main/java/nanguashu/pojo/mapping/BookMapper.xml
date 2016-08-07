@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.BookMapper" >
+    
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.Book">
+    <id column="BOOK_TYPE_ID" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_TYPE_NAME" property="bookTypeName" jdbcType="VARCHAR" />
+    <result column="IS_USING" property="isUsing" jdbcType="VARCHAR" />
+    <result column="BOOK_SUM" property="bookSum" jdbcType="INTEGER" />
+    <result column="PARENT_TYPE_ID" property="parentTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_BORROW_NUM" property="bookBorrowNum" jdbcType="INTEGER" />
+  </resultMap>
+  	
+    <resultMap id="BookTypeResultMap" type="nanguashu.pojo.Book" >
+    <id column="BOOK_TYPE_ID" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_TYPE_NAME" property="bookTypeName" jdbcType="VARCHAR" />
+    <result column="IS_USING" property="isUsing" jdbcType="VARCHAR" />
+    <result column="BOOK_SUM" property="bookSum" jdbcType="INTEGER" />
+    <result column="PARENT_TYPE_ID" property="parentTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_BORROW_NUM" property="bookBorrowNum" jdbcType="INTEGER" />
+    <result column="COMMON_CODE_NAME" property="codeName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <select id="selectBookViewInfo" resultMap="BookTypeResultMap" parameterType="nanguashu.pojo.Book">
+       SELECT 
+		  BOOK_TYPE_ID,
+		  BOOK_TYPE_NAME,
+		  IS_USING,
+		  BOOK_SUM,
+		  PARENT_TYPE_ID,
+		  BOOK_BORROW_NUM,
+		  D.COMMON_CODE_NAME 
+		FROM
+		  NANGUASHU_BOOK B,
+		  nanguashu_common_code_data D 
+		WHERE B.PARENT_TYPE_ID = D.ID 
+		 <if test="bookBorrowNum == 1" >
+        	AND B.BOOK_SUM > B.BOOK_BORROW_NUM
+     	 </if>
+     	  <if test="bookBorrowNum == 2" >
+        	AND B.BOOK_SUM = B.BOOK_BORROW_NUM 
+     	 </if>
+     	 <if test="parentTypeId != null" >
+      		AND  PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER}
+      	 </if>
+      	 <if test="bookTypeName != null" >
+      		AND  B.BOOK_TYPE_NAME LIKE #{bookTypeName,jdbcType=INTEGER}
+      	 </if>
+    </select>
+  
+  <sql id="Base_Column_List" >
+    BOOK_TYPE_ID, BOOK_TYPE_NAME, IS_USING, BOOK_SUM, PARENT_TYPE_ID, BOOK_BORROW_NUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_book
+    where BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nanguashu_book
+    where BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.Book" >
+    insert into nanguashu_book (BOOK_TYPE_ID, BOOK_TYPE_NAME, IS_USING, 
+      BOOK_SUM, PARENT_TYPE_ID, BOOK_BORROW_NUM
+      )
+    values (#{bookTypeId,jdbcType=INTEGER}, #{bookTypeName,jdbcType=VARCHAR}, #{isUsing,jdbcType=VARCHAR}, 
+      #{bookSum,jdbcType=INTEGER}, #{parentTypeId,jdbcType=INTEGER}, #{bookBorrowNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.Book" >
+    insert into nanguashu_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookTypeId != null" >
+        BOOK_TYPE_ID,
+      </if>
+      <if test="bookTypeName != null" >
+        BOOK_TYPE_NAME,
+      </if>
+      <if test="isUsing != null" >
+        IS_USING,
+      </if>
+      <if test="bookSum != null" >
+        BOOK_SUM,
+      </if>
+      <if test="parentTypeId != null" >
+        PARENT_TYPE_ID,
+      </if>
+      <if test="bookBorrowNum != null" >
+        BOOK_BORROW_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookTypeId != null" >
+        #{bookTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTypeName != null" >
+        #{bookTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsing != null" >
+        #{isUsing,jdbcType=VARCHAR},
+      </if>
+      <if test="bookSum != null" >
+        #{bookSum,jdbcType=INTEGER},
+      </if>
+      <if test="parentTypeId != null" >
+        #{parentTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowNum != null" >
+        #{bookBorrowNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.Book" >
+    update nanguashu_book
+    <set >
+      <if test="bookTypeName != null" >
+        BOOK_TYPE_NAME = #{bookTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsing != null" >
+        IS_USING = #{isUsing,jdbcType=VARCHAR},
+      </if>
+      <if test="bookSum != null" >
+        BOOK_SUM = #{bookSum,jdbcType=INTEGER},
+      </if>
+      <if test="parentTypeId != null" >
+        PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowNum != null" >
+        BOOK_BORROW_NUM = #{bookBorrowNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.Book" >
+    update nanguashu_book
+    set BOOK_TYPE_NAME = #{bookTypeName,jdbcType=VARCHAR},
+      IS_USING = #{isUsing,jdbcType=VARCHAR},
+      BOOK_SUM = #{bookSum,jdbcType=INTEGER},
+      PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
+      BOOK_BORROW_NUM = #{bookBorrowNum,jdbcType=INTEGER}
+    where BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllBookNum" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM NANGUASHU_BOOK B WHERE B.IS_USING='1'
+   </select>
+   <select id="validateBookTypeHasBook" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT COUNT(1) FROM NANGUASHU_BOOK B WHERE B.IS_USING='1' AND B.PARENT_TYPE_ID=#{parentTypeId,jdbcType=INTEGER}
+   </select> 
+  
+   <select id="selectAllBookList" resultMap="BaseResultMap">
+    SELECT
+     <include refid="Base_Column_List" />
+     FROM NANGUASHU_BOOK B WHERE B.IS_USING='1'
+   </select>
+   <select id="validateBookItemExsits" resultType="java.lang.Integer" parameterType="nanguashu.pojo.Book">
+    SELECT COUNT(1) FROM NANGUASHU_BOOK B WHERE B.IS_USING='1'
+     AND   PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER} 
+     AND B.BOOK_TYPE_NAME = #{bookTypeName,jdbcType=VARCHAR}
+     <if test="bookTypeId != null" >
+         AND B.BOOK_TYPE_ID != #{bookTypeId,jdbcType=VARCHAR}
+      </if>
+   </select>
+</mapper>

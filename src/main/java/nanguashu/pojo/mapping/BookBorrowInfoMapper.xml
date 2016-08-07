@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.BookBorrowInfoMapper" >
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.BookBorrowInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
+    <result column="STUDENT_ID" property="studentId" jdbcType="INTEGER" />
+    <result column="BORROW_TIME" property="borrowTime" jdbcType="DATE" />
+    <result column="BORROW_DAY" property="borrowDay" jdbcType="INTEGER" />
+    <result column="RETURN_DAY" property="returnDay" jdbcType="DATE" />
+    <result column="CREATE_BY_ID" property="createById" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_NAME" property="createByName" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_TIME" property="createByTime" jdbcType="DATE" />
+    <result column="BORROW_INFO" property="borrowInfo" jdbcType="VARCHAR" />
+     <result column="BOOK_STATUS" property="bookStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BOOK_ID, STUDENT_ID, BORROW_TIME, BORROW_DAY, RETURN_DAY, CREATE_BY_ID, CREATE_BY_NAME, 
+    CREATE_BY_TIME, BORROW_INFO, BOOK_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_book_borrow_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nanguashu_book_borrow_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.BookBorrowInfo" >
+    insert into nanguashu_book_borrow_info (ID, BOOK_ID, STUDENT_ID, 
+      BORROW_TIME, BORROW_DAY, RETURN_DAY, 
+      CREATE_BY_ID, CREATE_BY_NAME, CREATE_BY_TIME, 
+      BORROW_INFO,BOOK_STATUS)
+    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{borrowTime,jdbcType=DATE}, #{borrowDay,jdbcType=INTEGER}, #{returnDay,jdbcType=DATE}, 
+      #{createById,jdbcType=VARCHAR}, #{createByName,jdbcType=VARCHAR}, #{createByTime,jdbcType=DATE}, 
+      #{borrowInfo,jdbcType=VARCHAR}, #{bookStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.BookBorrowInfo" >
+    insert into nanguashu_book_borrow_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bookId != null" >
+        BOOK_ID,
+      </if>
+      <if test="studentId != null" >
+        STUDENT_ID,
+      </if>
+      <if test="borrowTime != null" >
+        BORROW_TIME,
+      </if>
+      <if test="borrowDay != null" >
+        BORROW_DAY,
+      </if>
+      <if test="returnDay != null" >
+        RETURN_DAY,
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID,
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME,
+      </if>
+      <if test="createByTime != null" >
+        CREATE_BY_TIME,
+      </if>
+      <if test="borrowInfo != null" >
+        BORROW_INFO,
+      </if>
+       <if test="bookStatus != null" >
+        BOOK_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowTime != null" >
+        #{borrowTime,jdbcType=DATE},
+      </if>
+      <if test="borrowDay != null" >
+        #{borrowDay,jdbcType=INTEGER},
+      </if>
+      <if test="returnDay != null" >
+        #{returnDay,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createByTime != null" >
+        #{createByTime,jdbcType=DATE},
+      </if>
+      <if test="borrowInfo != null" >
+        #{borrowInfo,jdbcType=VARCHAR},
+      </if>
+       <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.BookBorrowInfo" >
+    update nanguashu_book_borrow_info
+    <set >
+      <if test="bookId != null" >
+        BOOK_ID = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowTime != null" >
+        BORROW_TIME = #{borrowTime,jdbcType=DATE},
+      </if>
+      <if test="borrowDay != null" >
+        BORROW_DAY = #{borrowDay,jdbcType=INTEGER},
+      </if>
+      <if test="returnDay != null" >
+        RETURN_DAY = #{returnDay,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createByTime != null" >
+        CREATE_BY_TIME = #{createByTime,jdbcType=DATE},
+      </if>
+      <if test="borrowInfo != null" >
+        BORROW_INFO = #{borrowInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowInfo != null" >
+        BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.BookBorrowInfo" >
+    update nanguashu_book_borrow_info
+    set BOOK_ID = #{bookId,jdbcType=INTEGER},
+      STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      BORROW_TIME = #{borrowTime,jdbcType=DATE},
+      BORROW_DAY = #{borrowDay,jdbcType=INTEGER},
+      RETURN_DAY = #{returnDay,jdbcType=DATE},
+      CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      CREATE_BY_TIME = #{createByTime,jdbcType=DATE},
+      BORROW_INFO = #{borrowInfo,jdbcType=VARCHAR},
+      BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllBorrowBookInfoList" resultMap="BaseResultMap">
+      SELECT  <include refid="Base_Column_List" />
+       FROM nanguashu_book_borrow_info F WHERE F.BOOK_STATUS='0' ORDER BY F.ID
+  </select>
+</mapper>

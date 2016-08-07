@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.StudentInfoMapper" >
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.StudentInfo" >
+    <id column="STUDENT_ID" property="studentId" jdbcType="INTEGER" />
+    <result column="STUDENT_CODE" property="studentCode" jdbcType="VARCHAR" />
+    <result column="STUDENT_NAME" property="studentName" jdbcType="VARCHAR" />
+    <result column="STUDENT_AGE" property="studentAge" jdbcType="INTEGER" />
+    <result column="STUDENT_IMG" property="studentImg" jdbcType="VARCHAR" />
+    <result column="STUDENT_PHONE" property="studentPhone" jdbcType="VARCHAR" />
+    <result column="STUDENT_ADDRESS" property="studentAddress" jdbcType="VARCHAR" />
+    <result column="STUDENT_SEX" property="studentSex" jdbcType="INTEGER" />
+    <result column="STUDENT_JOIN_TIME" property="studentJoinTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STUDENT_ID, STUDENT_CODE, STUDENT_NAME, STUDENT_AGE, STUDENT_IMG, STUDENT_PHONE, 
+    STUDENT_ADDRESS, STUDENT_SEX, STUDENT_JOIN_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_student_info
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nanguashu_student_info
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.StudentInfo" >
+    insert into nanguashu_student_info (STUDENT_ID, STUDENT_CODE, STUDENT_NAME, 
+      STUDENT_AGE, STUDENT_IMG, STUDENT_PHONE, 
+      STUDENT_ADDRESS, STUDENT_SEX, STUDENT_JOIN_TIME
+      )
+    values (#{studentId,jdbcType=INTEGER}, #{studentCode,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
+      #{studentAge,jdbcType=INTEGER}, #{studentImg,jdbcType=VARCHAR}, #{studentPhone,jdbcType=VARCHAR}, 
+      #{studentAddress,jdbcType=VARCHAR}, #{studentSex,jdbcType=INTEGER}, #{studentJoinTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.StudentInfo" >
+    insert into nanguashu_student_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        STUDENT_ID,
+      </if>
+      <if test="studentCode != null" >
+        STUDENT_CODE,
+      </if>
+      <if test="studentName != null" >
+        STUDENT_NAME,
+      </if>
+      <if test="studentAge != null" >
+        STUDENT_AGE,
+      </if>
+      <if test="studentImg != null" >
+        STUDENT_IMG,
+      </if>
+      <if test="studentPhone != null" >
+        STUDENT_PHONE,
+      </if>
+      <if test="studentAddress != null" >
+        STUDENT_ADDRESS,
+      </if>
+      <if test="studentSex != null" >
+        STUDENT_SEX,
+      </if>
+      <if test="studentJoinTime != null" >
+        STUDENT_JOIN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentCode != null" >
+        #{studentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        #{studentAge,jdbcType=INTEGER},
+      </if>
+      <if test="studentImg != null" >
+        #{studentImg,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhone != null" >
+        #{studentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        #{studentSex,jdbcType=INTEGER},
+      </if>
+      <if test="studentJoinTime != null" >
+        #{studentJoinTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.StudentInfo" >
+    update nanguashu_student_info
+    <set >
+      <if test="studentCode != null" >
+        STUDENT_CODE = #{studentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        STUDENT_NAME = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        STUDENT_AGE = #{studentAge,jdbcType=INTEGER},
+      </if>
+      <if test="studentImg != null" >
+        STUDENT_IMG = #{studentImg,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhone != null" >
+        STUDENT_PHONE = #{studentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        STUDENT_ADDRESS = #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        STUDENT_SEX = #{studentSex,jdbcType=INTEGER},
+      </if>
+      <if test="studentJoinTime != null" >
+        STUDENT_JOIN_TIME = #{studentJoinTime,jdbcType=DATE},
+      </if>
+    </set>
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.StudentInfo" >
+    update nanguashu_student_info
+    set STUDENT_CODE = #{studentCode,jdbcType=VARCHAR},
+      STUDENT_NAME = #{studentName,jdbcType=VARCHAR},
+      STUDENT_AGE = #{studentAge,jdbcType=INTEGER},
+      STUDENT_IMG = #{studentImg,jdbcType=VARCHAR},
+      STUDENT_PHONE = #{studentPhone,jdbcType=VARCHAR},
+      STUDENT_ADDRESS = #{studentAddress,jdbcType=VARCHAR},
+      STUDENT_SEX = #{studentSex,jdbcType=INTEGER},
+      STUDENT_JOIN_TIME = #{studentJoinTime,jdbcType=DATE}
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryStudentInfos" parameterType="nanguashu.pojo.StudentInfo" resultMap="BaseResultMap">
+       select
+     STUDENT_ID,
+    STUDENT_CODE,
+    STUDENT_NAME,
+    STUDENT_AGE,
+    STUDENT_PHONE,
+    STUDENT_ADDRESS,
+    STUDENT_SEX,
+    STUDENT_JOIN_TIME,
+    STUDENT_IMG
+    from nanguashu_student_info
+    where 1=1
+     <if test="studentCode != null" >
+       and STUDENT_CODE like #{studentCode,jdbcType=VARCHAR}
+      </if>
+      <if test="studentName != null" >
+       and STUDENT_NAME like #{studentName,jdbcType=VARCHAR}
+      </if>
+  </select>
+</mapper>

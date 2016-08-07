@@ -1,0 +1,47 @@
+/*表格隔行变色  为要变色的tr 添加class属性：backrow*/
+ .tablelist{	
+    border:1px solid #0058a3;
+    font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif;
+    border-collapse:collapse;
+    border-spacing:1pt;
+    background-color:#eaf5ff;
+    font-size:13px
+  }
+  .tablelist tr.backrow{
+    background-color:#c7e5ff;
+  }
+  .tablelist td.cen{
+    text-align:center;
+  }
+  
+  
+ /*表格隔行隔列变色*/
+ .tableRowCell{
+  body{padding:0;margin:0;font:normal 12px/24px "\5FAE\8F6F\96C5\9ED1";color:#444;}
+  table{width:500px;border:0;margin:100px auto 0;text-align:center;border-collapse:collapse;border-spacing:0;}
+  table th{background:#0090D7;font-weight:normal;line-height:30px;font-size:14px;color:#FFF;}
+  table tr:nth-child(odd){background:#F4F4F4;}
+  table td:nth-child(even){color:#C00;}
+  table tr:nth-child(5){background:#73B1E0;color:#FFF;}
+  table tr:hover{background:#73B1E0;color:#FFF;}
+  table td,table th{border:1px solid #EEE;}
+
+
+
+/*显示自定义的鼠标形状*/
+tr  {cursor:text;}
+img  {cursor:hand;}
+a  {cursor:help;}
+
+
+
+
+ 
+  
+ 
+  
+  
+  
+  
+  
+  

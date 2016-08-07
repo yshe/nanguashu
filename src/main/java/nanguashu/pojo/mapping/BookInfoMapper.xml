@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nanguashu.dao.BookInfoMapper" >
+  <resultMap id="BaseResultMap" type="nanguashu.pojo.BookInfo" >
+    <id column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
+    <result column="BOOK_NO" property="bookNo" jdbcType="VARCHAR" />
+    <result column="BOOK_NAME" property="bookName" jdbcType="VARCHAR" />
+    <result column="BOOK_DES" property="bookDes" jdbcType="VARCHAR" />
+    <result column="BOOK_AUTHOR" property="bookAuthor" jdbcType="VARCHAR" />
+    <result column="BOOK_PUBLISH" property="bookPublish" jdbcType="VARCHAR" />
+    <result column="BOOK_JOIN_TIME" property="bookJoinTime" jdbcType="DATE" />
+    <result column="CREATE_BY_ID" property="createById" jdbcType="VARCHAR" />
+    <result column="CREATE_BY_NAME" property="createByName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="LAST_UPDATE_ID" property="lastUpdateId" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_NAME" property="lastUpdateName" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="DATE" />
+    <result column="BOOK_TYPE_ID" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_STATUS" property="bookStatus" jdbcType="VARCHAR" />
+  </resultMap>
+    <resultMap id="BaseResultPageMap" type="nanguashu.pojo.BookInfo" >
+    <id column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
+    <result column="BOOK_NO" property="bookNo" jdbcType="VARCHAR" />
+    <result column="BOOK_NAME" property="bookName" jdbcType="VARCHAR" />
+    <result column="BOOK_AUTHOR" property="bookAuthor" jdbcType="VARCHAR" />
+    <result column="BOOK_PUBLISH" property="bookPublish" jdbcType="VARCHAR" />
+    <result column="BOOK_JOIN_TIME" property="bookJoinTime" jdbcType="DATE" />
+    <result column="CREATE_BY_NAME" property="createByName" jdbcType="VARCHAR" />
+    <result column="BOOK_TYPE_ID" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="BOOK_STATUS" property="bookStatus" jdbcType="VARCHAR" />
+     <result column="COMMON_CODE_NAME" property="codeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BOOK_ID, BOOK_NO, BOOK_NAME, BOOK_DES, BOOK_AUTHOR, BOOK_PUBLISH, BOOK_JOIN_TIME, 
+    CREATE_BY_ID, CREATE_BY_NAME, CREATE_TIME, LAST_UPDATE_ID, LAST_UPDATE_NAME, LAST_UPDATE_TIME, 
+    BOOK_TYPE_ID,BOOK_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_book_info
+    where BOOK_ID = #{bookId,jdbcType=INTEGER}
+  </select>
+   <select id="selectBookInfoBybookTypeId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select count(1)
+    from nanguashu_book_info
+    where BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nanguashu_book_info
+    where BOOK_ID = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="nanguashu.pojo.BookInfo" >
+    insert into nanguashu_book_info (BOOK_ID, BOOK_NO, BOOK_NAME, 
+      BOOK_DES, BOOK_AUTHOR, BOOK_PUBLISH, 
+      BOOK_JOIN_TIME, CREATE_BY_ID, CREATE_BY_NAME, 
+      CREATE_TIME, LAST_UPDATE_ID, LAST_UPDATE_NAME, 
+      LAST_UPDATE_TIME, BOOK_TYPE_ID,BOOK_STATUS)
+    values (#{bookId,jdbcType=INTEGER}, #{bookNo,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, 
+      #{bookDes,jdbcType=VARCHAR}, #{bookAuthor,jdbcType=VARCHAR}, #{bookPublish,jdbcType=VARCHAR}, 
+      #{bookJoinTime,jdbcType=DATE}, #{createById,jdbcType=VARCHAR}, #{createByName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{lastUpdateId,jdbcType=VARCHAR}, #{lastUpdateName,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=DATE}, #{bookTypeId,jdbcType=INTEGER},#{bookStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="nanguashu.pojo.BookInfo" >
+    insert into nanguashu_book_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        BOOK_ID,
+      </if>
+      <if test="bookNo != null" >
+        BOOK_NO,
+      </if>
+      <if test="bookName != null" >
+        BOOK_NAME,
+      </if>
+      <if test="bookDes != null" >
+        BOOK_DES,
+      </if>
+      <if test="bookAuthor != null" >
+        BOOK_AUTHOR,
+      </if>
+      <if test="bookPublish != null" >
+        BOOK_PUBLISH,
+      </if>
+      <if test="bookJoinTime != null" >
+        BOOK_JOIN_TIME,
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID,
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastUpdateId != null" >
+        LAST_UPDATE_ID,
+      </if>
+      <if test="lastUpdateName != null" >
+        LAST_UPDATE_NAME,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+      <if test="bookTypeId != null" >
+        BOOK_TYPE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookNo != null" >
+        #{bookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDes != null" >
+        #{bookDes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null" >
+        #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPublish != null" >
+        #{bookPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="bookJoinTime != null" >
+        #{bookJoinTime,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="lastUpdateId != null" >
+        #{lastUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateName != null" >
+        #{lastUpdateName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="bookTypeId != null" >
+        #{bookTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="nanguashu.pojo.BookInfo" >
+    update nanguashu_book_info
+    <set >
+      <if test="bookNo != null" >
+        BOOK_NO = #{bookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDes != null" >
+        BOOK_DES = #{bookDes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null" >
+        BOOK_AUTHOR = #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPublish != null" >
+        BOOK_PUBLISH = #{bookPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="bookJoinTime != null" >
+        BOOK_JOIN_TIME = #{bookJoinTime,jdbcType=DATE},
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null" >
+        CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="lastUpdateId != null" >
+        LAST_UPDATE_ID = #{lastUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateName != null" >
+        LAST_UPDATE_NAME = #{lastUpdateName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="bookTypeId != null" >
+        BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER},
+      </if>
+       <if test="bookStatus != null" >
+       BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where BOOK_ID = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="nanguashu.pojo.BookInfo" >
+    update nanguashu_book_info
+    set BOOK_NO = #{bookNo,jdbcType=VARCHAR},
+      BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      BOOK_DES = #{bookDes,jdbcType=VARCHAR},
+      BOOK_AUTHOR = #{bookAuthor,jdbcType=VARCHAR},
+      BOOK_PUBLISH = #{bookPublish,jdbcType=VARCHAR},
+      BOOK_JOIN_TIME = #{bookJoinTime,jdbcType=DATE},
+      CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      LAST_UPDATE_ID = #{lastUpdateId,jdbcType=VARCHAR},
+      LAST_UPDATE_NAME = #{lastUpdateName,jdbcType=VARCHAR},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=DATE},
+      BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER},
+       BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR}
+    where BOOK_ID = #{bookId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllBookInfoNum" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM NANGUASHU_BOOK_INFO
+   </select>
+   
+   <select id="selectAllBookInfoList" resultMap="BaseResultMap">
+    SELECT
+     <include refid="Base_Column_List" />
+     FROM NANGUASHU_BOOK_INFO
+   </select>
+   <select id="selectByKeySelective" resultMap="BaseResultMap" parameterType="nanguashu.pojo.BookInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from nanguashu_book_info
+    where 1=1
+     <if test="bookNo != null" >
+      AND  BOOK_NO = #{bookNo,jdbcType=VARCHAR}
+      </if>
+      <if test="bookName != null" >
+       AND BOOK_NAME = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookDes != null" >
+       AND BOOK_DES = #{bookDes,jdbcType=VARCHAR}
+      </if>
+      <if test="bookAuthor != null" >
+       AND BOOK_AUTHOR = #{bookAuthor,jdbcType=VARCHAR}
+      </if>
+      <if test="bookPublish != null" >
+       AND BOOK_PUBLISH = #{bookPublish,jdbcType=VARCHAR}
+      </if>
+      <if test="bookJoinTime != null" >
+       AND BOOK_JOIN_TIME = #{bookJoinTime,jdbcType=DATE}
+      </if>
+      <if test="createById != null" >
+       AND CREATE_BY_ID = #{createById,jdbcType=VARCHAR}
+      </if>
+      <if test="createByName != null" >
+       AND CREATE_BY_NAME = #{createByName,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+       AND CREATE_TIME = #{createTime,jdbcType=DATE}
+      </if>
+      <if test="lastUpdateId != null" >
+       AND LAST_UPDATE_ID = #{lastUpdateId,jdbcType=VARCHAR}
+      </if>
+      <if test="lastUpdateName != null" >
+       AND  LAST_UPDATE_NAME = #{lastUpdateName,jdbcType=VARCHAR}
+      </if>
+      <if test="lastUpdateTime != null" >
+       AND LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=DATE}
+      </if>
+      <if test="bookTypeId != null" >
+       AND BOOK_TYPE_ID = #{bookTypeId,jdbcType=INTEGER}
+      </if>
+       <if test="bookStatus != null" >
+       AND BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+   <select id="selectBookInfoViewInfo" resultMap="BaseResultPageMap" parameterType="nanguashu.pojo.BookInfo">
+     SELECT 
+		 D.COMMON_CODE_NAME,
+		 F.BOOK_NO,
+		 F.BOOK_ID,
+		 F.BOOK_NAME,
+		 F.BOOK_TYPE_ID,
+		 F.BOOK_AUTHOR,
+		 F.BOOK_PUBLISH,
+		 DATE_FORMAT(F.BOOK_JOIN_TIME,'%Y-%m-%d') AS BOOK_JOIN_TIME,
+		 F.CREATE_BY_NAME,
+		 CASE 
+		 WHEN F.BOOK_STATUS=0 THEN '初始' 
+		  WHEN F.BOOK_STATUS=1 THEN '已借出' 
+		 ELSE '已归还' 
+		 END AS BOOK_STATUS
+		FROM
+		  NANGUASHU_BOOK_INFO F,
+		  NANGUASHU_BOOK B,
+		  nanguashu_common_code_data D 
+		WHERE F.BOOK_TYPE_ID = B.BOOK_TYPE_ID
+		  AND B.PARENT_TYPE_ID = D.ID
+		  <if test="bookStatus != null" >
+	        AND F.BOOK_STATUS=#{bookStatus,jdbcType=VARCHAR}
+	      </if>
+		  <if test="bookNo != null" >
+	        AND F.BOOK_NO LIKE #{bookNo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="bookName != null" >
+	        AND F.BOOK_NAME LIKE #{bookName,jdbcType=VARCHAR}
+	      </if>
+   </select>
+</mapper>
